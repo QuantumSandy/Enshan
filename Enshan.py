@@ -66,7 +66,7 @@ def main(*arg):
 
 
 if __name__ == "__main__":
-    if cookie:
+    if cookies:
         print("----------恩山论坛开始尝试签到----------")
         main()
         print("----------恩山论坛签到执行完毕----------")
