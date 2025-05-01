@@ -7,9 +7,9 @@ except:
     pass
 from lxml import etree
 
-cookie = os.environ.get("cookie_enshan")
+cookies = os.environ.get("cookie_enshan")
 
-def run(*arg):
+def run(cookie):
     msg = []
 
     # 签到
@@ -48,20 +48,18 @@ def run(*arg):
                 "value": str(e),
             }
         ]
-    return msg
+    return str(msg)
 
 def main(*arg):
-    msg = []
-    global cookie
-    if "\\n" in cookie:
-        clist = cookie.split("\\n")
+    msg = ""
+    if "\\n" in cookies:
+        clist = cookies.split("\\n")
     else:
-        clist = cookie.split("\n")
+        clist = cookies.split("\n")
     i = 0
     while i < len(clist):
         msg += f"第 {i+1} 个账号开始执行任务\n"
-        cookie = clist[i]
-        msg += run(cookie)
+        msg += run(clist[i])
         i += 1
     print(msg[:-1])
     return msg[:-1]
