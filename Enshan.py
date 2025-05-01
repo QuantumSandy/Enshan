@@ -19,6 +19,8 @@ headers = {
     'Accept-Encoding': 'gzip, deflate, br',
 }
 
+use_proxies = False
+
 def proxies(try_num):
     url = 'https://proxy.scdn.io/api/get_proxy.php'
     params = {
@@ -63,7 +65,7 @@ def run(cookie):
         url="https://www.right.com.cn/FORUM/home.php?mod=spacecp&ac=credit&showcredit=1",
         headers=headers,
         verify=False,
-        proxies=proxies(try_num=5)
+        proxies=(proxies(try_num=5) if use_proxies else None)
     )
     if response.status_code == 200:
         try:
