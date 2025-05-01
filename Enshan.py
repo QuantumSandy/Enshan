@@ -7,7 +7,7 @@ except:
     pass
 from lxml import etree
 
-cookies = os.environ.get("cookie_enshan")
+cookies = str(os.environ.get("cookie_enshan"))
 
 def run(cookie):
     msg = []
@@ -61,8 +61,8 @@ def main(*arg):
         msg += f"第 {i+1} 个账号开始执行任务\n"
         msg += run(clist[i])
         i += 1
-    print(msg[:-1])
-    return msg[:-1]
+    print(msg)
+    return
 
 
 if __name__ == "__main__":
