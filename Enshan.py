@@ -28,26 +28,29 @@ def run(cookie):
         headers=headers,
         verify=False,
     )
-    try:
-        coin = re.findall("恩山币: </em>(.*?)&nbsp;", response.text)[0]
-        point = re.findall("<em>积分: </em>(.*?)<span", response.text)[0]
-        msg = [
-            {
-                "name": "恩山币",
-                "value": coin,
-            },
-            {
-                "name": "积分",
-                "value": point,
-            },
-        ]
-    except Exception as e:
-        msg = [
-            {
-                "name": "签到失败",
-                "value": str(e),
-            }
-        ]
+    if response.status_code == 200:
+        try:
+            coin = re.findall("恩山币: </em>(.*?)&nbsp;", response.text)
+            point = re.findall("<em>积分: </em>(.*?)<span", response.text)
+            msg = [
+                {
+                    "name": "恩山币",
+                    "value": coin,
+                },
+                {
+                    "name": "积分",
+                    "value": point,
+                },
+            ]
+        except Exception as e:
+            msg = [
+                {
+                    "name": "签到失败",
+                    "value": str(e),
+                }
+            ]
+    else:
+        msg = [{"Bad request": f"{response.status_code}"}]
     return str(msg)
 
 def main(*arg):
